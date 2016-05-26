@@ -106,6 +106,14 @@ class TestSuite < MiniTest::Test
 		assert rover.direction = "E"
 	end
 
+	def test_plateau_edge_crash_protection
+		rover = Rover.new(5,5,"N")
+		rover.move_forward
+		assert rover.x == 5
+		assert rover.y == 5
+		assert rover.direction = "N"
+	end
+
 end
 
 
