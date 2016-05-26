@@ -19,6 +19,7 @@ class Rover
 			when "R"
 				self.rotate_right
 			when "M"
+				break if self.move_impossible?
 				self.move_forward
 			end
 		end
@@ -50,8 +51,17 @@ class Rover
 		end
 	end
 
+
+	def move_impossible?
+		case @direction
+		when "N" || "E"
+			(@x + 1 > AREA_LIMIT[0]) || (@y + 1 > AREA_LIMIT[1])
+		when "W" || "S"
+			(@x - 1 < 0) || (@y - 1 < 0)
+		end		
+	end
+
 	def move_forward
-		return if (@x + 1 > AREA_LIMIT[0]) || (@y + 1 > AREA_LIMIT[1])
 		case @direction
 		when "N"
 			@y += 1
@@ -110,13 +120,13 @@ class TestSuite < MiniTest::Test
 
 	def test_plateau_edge_crash_protection
 		rover = Rover.new(5,5,"N")
-		rover.move_forward
+		rover.navigate("M")
 		assert rover.x == 5
 		assert rover.y == 5
 		assert rover.direction = "N"
 
 		rover = Rover.new(0,0,"W")
-		rover.move_forward
+		rover.navigate("M")
 		assert rover.x == 0
 		assert rover.y == 0
 		assert rover.direction = "W"
