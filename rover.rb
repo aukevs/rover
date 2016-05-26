@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/benchmark'
 
 class Rover	
+	AREA_LIMIT = [5,5]
 	attr_accessor :x, :y, :direction
 	def initialize(x, y, direction)
 		@x = x
@@ -50,6 +51,7 @@ class Rover
 	end
 
 	def move_forward
+		return if (@x + 1 > AREA_LIMIT[0]) || (@y + 1 > AREA_LIMIT[1])
 		case @direction
 		when "N"
 			@y += 1
