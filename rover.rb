@@ -17,6 +17,19 @@ class TestSuite < MiniTest::Test
 		assert rover.y = 2
 		assert rover.direction = "N"
 	end
+
+	def test_rotates_left
+		rover = Rover.new(0,0,"N")
+		rover.rotate_left
+		assert rover.direction == "W"
+	end
+
+	def test_rotates_right
+		rover = Rover.new(0,0,"N")
+		rover.rotate_right
+		assert rover.direction == "E"
+	end
+
 end
 
 
