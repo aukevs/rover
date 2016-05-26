@@ -78,6 +78,20 @@ class TestSuite < MiniTest::Test
 		assert rover.direction == "N"
 	end
 
+	def test_navigation_instruction_parser
+		rover = Rover.new(1,2,"N")
+		rover.navigate("LMLMLMLMM")
+		assert rover.x = 1
+		assert rover.y = 3
+		assert rover.direction = "N"
+		
+		rover = Rover.new(3,3,"E")
+		rover.navigate("MMRMMRMRRM")
+		assert rover.x = 5
+		assert rover.y = 1
+		assert rover.direction = "E"
+	end
+
 end
 
 
