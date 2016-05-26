@@ -170,6 +170,14 @@ class TestSuite < MiniTest::Test
 		assert rover.current_location == {x: 0, y: 3, facing: "W"}
 	end
 
+	def test_validate_instructions
+		rover = Rover.new(0,0,"E")
+		assert rover.navigate("MMMMMMM") == false
+		assert rover.x = 0
+		assert rover.y = 0
+		assert rover.direction = "E"
+	end
+
 end
 
 
