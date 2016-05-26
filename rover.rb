@@ -24,7 +24,13 @@ class Rover
 			end
 		end
 	end
+	
+	def current_location
+		{x: @x, y: @y, facing: @direction}
+	end
 
+	protected
+	
 	def rotate_left
 		case @direction
 		when "N"
@@ -86,19 +92,19 @@ class TestSuite < MiniTest::Test
 
 	def test_rotates_left
 		rover = Rover.new(0,0,"N")
-		rover.rotate_left
+		rover.send(:rotate_left)
 		assert rover.direction == "W"
 	end
 
 	def test_rotates_right
 		rover = Rover.new(0,0,"N")
-		rover.rotate_right
+		rover.send(:rotate_right)
 		assert rover.direction == "E"
 	end
 
 	def test_moves_forward
 		rover = Rover.new(0,0,"N")
-		rover.move_forward
+		rover.send(:move_forward)
 		assert rover.x == 0
 		assert rover.y == 1
 		assert rover.direction == "N"
@@ -148,6 +154,11 @@ class TestSuite < MiniTest::Test
 		assert rover.x == 0
 		assert rover.y == 3
 		assert rover.direction = "W"
+	end
+
+	def test_retrieve_current_location
+		rover = Rover.new(0,3,"W")
+		assert rover.current_location == {x: 0, y: 3, facing: "W"}
 	end
 
 end
