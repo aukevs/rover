@@ -3,6 +3,13 @@ require 'minitest/benchmark'
 
 class Rover	
 	AREA_LIMIT = [5,5]
+	MOVE_SPEED = 1
+	LANG = {left: "L", right: "R", move: "M"}
+	NORTH = "N"
+	WEST = "W"
+	SOUTH = "S"
+	EAST = "E"
+
 	attr_accessor :x, :y, :direction
 	def initialize(x, y, direction)
 		@x = x
@@ -14,11 +21,11 @@ class Rover
 		instructions = input.split("")
 		for instruction in instructions
 			case instruction
-			when "L"
+			when LANG[:left]
 				self.rotate_left
-			when "R"
+			when LANG[:right]
 				self.rotate_right
-			when "M"
+			when LANG[:move]
 				break if self.move_impossible?
 				self.move_forward
 			end
@@ -33,50 +40,52 @@ class Rover
 	
 	def rotate_left
 		case @direction
-		when "N"
-			@direction = "W"
-		when "W"
-			@direction = "S"
-		when "S"
-			@direction = "E"
-		when "E"
-			@direction = "N"
+		when NORTH
+			@direction = WEST
+		when WEST
+			@direction = SOUTH
+		when SOUTH
+			@direction = EAST
+		when EAST
+			@direction = NORTH
 		end
 	end
 
 	def rotate_right
 		case @direction
-		when "N"
-			@direction = "E"
-		when "E"
-			@direction = "S"
-		when "S"
-			@direction = "W"
-		when "W"
-			@direction = "N"
+		when NORTH
+			@direction = EAST
+		when EAST
+			@direction = SOUTH
+		when SOUTH
+			@direction = WEST
+		when WEST
+			@direction = NORTH
 		end
 	end
 
 
 	def move_impossible?
 		case @direction
-		when "N", "E"
-		  (@x + 1 > AREA_LIMIT[0]) || (@y + 1 > AREA_LIMIT[1])
-		when "W", "S"
-			(@x - 1 < 0) || (@y - 1 < 0)
+		when NORTH, EAST
+			# Move would hit a x or y coordinate that is larger then the AREA_LIMIT ex: 6,6
+		  (@x + MOVE_SPEED > AREA_LIMIT[0]) || (@y + MOVE_SPEED > AREA_LIMIT[1])
+		when WEST, SOUTH
+			# Move would hit a x or y coordinate that is smaller then the AREA_LIMIT ex: -1,0
+			(@x - MOVE_SPEED < 0) || (@y - MOVE_SPEED < 0)
 		end		
 	end
 
 	def move_forward
 		case @direction
-		when "N"
-			@y += 1
-		when "E"
-			@x += 1
-		when "W"
-			@x -= 1
-		when "S"
-			@y -= 1
+		when NORTH
+			@y += MOVE_SPEED
+		when EAST
+			@x += MOVE_SPEED
+		when WEST
+			@x -= MOVE_SPEED
+		when SOUTH
+			@y -= MOVE_SPEED
 		end
 	end
 
