@@ -35,6 +35,19 @@ class Rover
 		end
 	end
 
+	def move_forward
+		case @direction
+		when "N"
+			@y += 1
+		when "E"
+			@x += 1
+		when "W"
+			@x -= 1
+		when "S"
+			@y -= 1
+		end
+	end
+
 end
 
 class TestSuite < MiniTest::Test
