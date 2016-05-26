@@ -114,6 +114,12 @@ class TestSuite < MiniTest::Test
 		assert rover.x == 5
 		assert rover.y == 5
 		assert rover.direction = "N"
+
+		rover = Rover.new(0,0,"W")
+		rover.move_forward
+		assert rover.x == 0
+		assert rover.y == 0
+		assert rover.direction = "W"
 	end
 
 end
