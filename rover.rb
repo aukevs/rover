@@ -68,22 +68,15 @@ class Rover
 
 	def move_impossible?
 		case @direction
-		when NORTH, EAST
-			# Move would hit a x or y coordinate that is larger then the AREA_LIMIT ex: 6,6
-		  (@x + MOVE_SPEED > AREA_LIMIT[0]) || (@y + MOVE_SPEED > AREA_LIMIT[1])
-		when WEST, SOUTH
-			if (@x - MOVE_SPEED < 0)
-        return true
-      else
-        return false
-      end
-
-      if (@y - MOVE_SPEED < 0)
-        return true
-      else
-        return false
-      end
-		end		
+		when NORTH
+      (@x + MOVE_SPEED > AREA_LIMIT[0])
+    when EAST
+      (@x + MOVE_SPEED > AREA_LIMIT[0])
+    when SOUTH
+      (@y - MOVE_SPEED < 0) 
+    when WEST
+      (@x - MOVE_SPEED < 0)
+    end
 	end
 
 	def move_forward
