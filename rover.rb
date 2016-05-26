@@ -9,6 +9,20 @@ class Rover
 		@direction = direction
 	end
 
+	def navigate(input)
+		instructions = input.split("")
+		for instruction in instructions
+			case instruction
+			when "L"
+				self.rotate_left
+			when "R"
+				self.rotate_right
+			when "M"
+				self.move_forward
+			end
+		end
+	end
+
 	def rotate_left
 		case @direction
 		when "N"
